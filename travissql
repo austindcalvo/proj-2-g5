@@ -1,0 +1,47 @@
+Create Table travis_highschools(
+    start_year varchar,
+    end_year varchar,
+    data_year integer,
+    state_accountability varchar,
+    campus_number integer,
+    campus_name varchar,
+    address varchar,
+    city varchar,
+    zip integer,
+    school_type varchar,
+    district_num integer,
+    district_name varchar,
+    county_num integer,
+    county_name varchar,
+    region_num integer,
+    region_name varchar,
+    county_grad_rt float,
+    campus_grad_rt float,
+    af_amer_grad_rt float,
+    asian_grad_rt float,
+    hisp_grad_rt float,
+    multi_grad_rt float,
+    native_grad_rt float,
+    pi_grad_rt float,
+    white_grad_rt float,
+    poor_grad_rt float,
+    female_grad_rt float,
+    male_grad_rt float,
+    geocode varchar
+);
+
+Select * From travis_highschools;
+
+CREATE TABLE travis2019
+AS SELECT
+  data_year,
+  campus_number,
+  zip,
+  school_type,
+  district_name,
+  county_grad_rt,
+  campus_grad_rt
+FROM travis_highschools
+WHERE data_year = 2019;
+
+Select * From travis2019
