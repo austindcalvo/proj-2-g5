@@ -1,3 +1,4 @@
+--Create high school table
 Create Table travis_highschools(
     start_year varchar,
     end_year varchar,
@@ -30,8 +31,9 @@ Create Table travis_highschools(
     geocode varchar
 );
 
-Select * From travis_highschools;
+        --Select * From travis_highschools;
 
+--Clean High School Table, remove years prior to 2019
 CREATE TABLE travis2019
 AS SELECT
   data_year,
@@ -44,4 +46,43 @@ AS SELECT
 FROM travis_highschools
 WHERE data_year = 2019;
 
-Select * From travis2019
+        --Select * From travis2019;
+
+--Create Demographics Table
+Create Table incomedata(
+    index serial,
+    zip integer,
+    population varchar,
+    num_of_households varchar,
+    median_income money,
+    average_income money
+);
+
+        --select * from incomedata;
+
+--Join Tables
+Select * 
+From travis2019
+Left join incomedata
+ON travis2019.zip=incomedata.zip;
+
+--Rename to allow join to become new table
+ALTER TABLE incomedata 
+RENAME COLUMN zip TO zip2;
+
+
+--Create new table
+Create Table final_data
+AS
+    Select *
+    From travis2019
+    Left Join incomedata
+    on (travis2019.zip=incomedata.zip2);
+
+
+
+--Delete second zip field    
+Alter Table final_data
+Drop Column zip2;
+
+        --select * from final_data
